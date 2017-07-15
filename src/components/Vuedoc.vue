@@ -13,6 +13,7 @@
 
     <h2>生态系统</h2>
     <div class="list sys">
+      <a href="https://cn.vuejs.org/" target="_blank"><span>vue官网</span></a>
       <a href="http://router.vuejs.org/" target="_blank"><span>vue-router</span></a>
       <a href="http://vuex.vuejs.org/" target="_blank"><span>vuex</span></a>
       <a href="http://vue-loader.vuejs.org/" target="_blank"><span>vue-loader</span></a>
@@ -62,7 +63,9 @@ h2:not(:first-child){
 }
 .list span{
   display: inline-block;
-  padding:5px 20px;
+  height: 30px;
+  line-height: 30px;
+  padding:0 20px;
   background: #44B7AC;
   color: #FFF;
   margin-right: 20px;

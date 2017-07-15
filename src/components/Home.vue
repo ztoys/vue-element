@@ -136,8 +136,8 @@ export default{
 	}
 	.bar{
 		background-color: #20A0FF;
-		height: 70px;
-		line-height: 70px;
+		height: 60px;
+		line-height: 60px;
 		color:#FFF;
 	}
 	.logo{
@@ -165,7 +165,7 @@ export default{
 	.main{
 		display: flex;
 		position: absolute;
-		top:70px;
+		top:60px;
 		bottom: 0px;
 		overflow: hidden;
 	}
