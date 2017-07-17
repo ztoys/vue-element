@@ -32,7 +32,9 @@
 						<router-link to="/form">
 				         	<el-menu-item index="1-3">Form</el-menu-item>
 				        </router-link>
-				         <el-menu-item index="1-4">选项4</el-menu-item>
+						<router-link to="/form2">
+				        	<el-menu-item index="1-4">选择器</el-menu-item>
+						</router-link>
 				       </el-menu-item-group>
 			    	</el-submenu>
 

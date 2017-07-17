@@ -1,14 +1,17 @@
 <template>
 	<div>
-		<!-- 列表 -->
-		<el-table highlight-current-row v-loading="listLoading" v-bind:data="company">
+		<!-- 列表 --><!-- 固定表头：height="800" -->
+		<el-table border  v-loading="listLoading" v-bind:data="company">
 			<el-table-column prop="name" label="公司" sortable></el-table-column>
-			<el-table-column prop="person" label="法人" width="100" sortable></el-table-column>
-			<el-table-column prop="money" label="注册资本" sortable></el-table-column>
-			<el-table-column prop="time" label="成立时间" sortable></el-table-column>
-			<el-table-column prop="status" label="状态" sortable></el-table-column>
-
+			<el-table-column prop="lawer" label="法人" width="100" sortable></el-table-column>
+			<el-table-column prop="registeredcapital" label="注册资本" width="200" sortable></el-table-column>
+			<el-table-column prop="licensingprior" label="成立时间" width="150" sortable></el-table-column>
+			<el-table-column prop="status" label="状态"  sortable></el-table-column>
 		</el-table>
+		
+		<el-col>
+			<el-pagination layout="prev,pager,next" v-bind:total="100" v-on:current-change="currentChange"></el-pagination>
+		</el-col>
 
 	</div>
 </template>
@@ -19,32 +22,47 @@
 	export default{
 		data(){
 			return {
-				company:[
-					{name:"珠海市泰润丝印有限公司",person:"杨祖文",money:"50万 人民币",time:"2005-02-02",status:"存续"},
-					{name:"珠海市宝思达印刷有限公司",person:"陈文珍",money:"150万元人民币 人民币",time:"2005-01-17",status:"吊销，已注销"},
-					{name:"珠海市森诚纸业有限公司",person:"孔贤珠",money:"50万 人民币",time:"1998-03-16",status:"存续"},
-				],
-				listLoading:false,
+				company:[],//列表数据
+				listLoading:false,//加载动画
+				total:100,//分页的总条数
+				select:"珠海",//接口查询词语
 			}
 		},
 		methods:{
+			//获取列表
 			getDate(){
+				this.listLoading=true;
+				var self = this;//暂存this,让内部函数能访问
 
+				// 默认情况下，Axios序列化JavaScript对象的JSON。在application/x-www-form-urlencoded格式发送数据
+				var qs=require('qs');
+				axios.post(
+					'https://bird.ioliu.cn/v1/?url=http://www.sxbao.com.cn/App/SelectBase',
+					qs.stringify({'select':this.select})
+				).then(function(data){
+					self.company=data.data;
+					self.listLoading=false;
+				})
+			},
+			//分页page改变时触发
+			currentChange(val){
+				console.log(val);
+				this.select="市";
+				this.getDate();
 			}
 		},
 		mounted() {
-			axios({
-				method:'post',
-				url:"http://www.sxbao.com.cn/App/SelectBase",
-				data:{select:"珠海"}
-			}).then(function(data){
-				console.log(data);
-			})
-		}
+			this.getDate();
+		},
 	}
 
 </script>
 
 <style>
+.el-pagination{
+	padding:0;
+	margin-top: 20px;
+	text-align: right;
+}
 	
 </style>
