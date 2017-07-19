@@ -4,7 +4,7 @@
 
 		<el-row>
 			<label for="" class="label">日期</label>
-			<el-date-picker v-model="value1" type="date" placeholder="选择日期">
+			<el-date-picker v-model="value1" type="date" placeholder="选择日期" v-on:change="datepicker">
 			</el-date-picker>
 		</el-row>
 
@@ -32,6 +32,11 @@
 			<label for="" class="label top">颜色</label>
 			<el-color-picker v-model="color"></el-color-picker>
 		</el-row>
+
+		<el-row>
+			<label for="" class="label top">进度</label>
+			<el-progress type="circle" v-bind:percentage="100"></el-progress>
+		</el-row>
 	</section>
 </template>
 
@@ -54,8 +59,27 @@
 		    handlePictureCardPreview(file) {
 		        this.dialogImageUrl = file.url;
 		        this.dialogVisible = true;
+		    },
+		    datepicker(){
+		    	//格式化日期
+		    	this.value1=this.formatDate(this.value1);
+
+		    	const h=this.$createElement;
+		    	this.$notify({
+		    		title:'成功',
+		    		message:this.value1,
+		    		type:'success'
+		    	});
+		    },
+		    //格式日期
+		    formatDate(date){
+		    	var y = date.getFullYear();  
+	    	    var m = date.getMonth() + 1;  
+	    	    m = m < 10 ? '0' + m : m;  
+	    	    var d = date.getDate();  
+	    	    d = d < 10 ? ('0' + d) : d;  
+	    	    return y + '-' + m + '-' + d; 
 		    }
-		    
 		}
 	}
 

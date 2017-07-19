@@ -25,26 +25,30 @@
 				       <el-menu-item-group title="分组1">
 				         <!-- <template slot="title">分组一</template> -->
 				         <router-link to="/"> 
-				         	<el-menu-item index="1-1">Home</el-menu-item>
+				         	<el-menu-item index="1-1">表格</el-menu-item>
 				         </router-link> 
+				         <router-link to="example">
+				         	<el-menu-item index="1-2">实例</el-menu-item>
+				         </router-link>
 				       </el-menu-item-group>
 				       <el-menu-item-group title="静态页面">
-						<router-link to="/form">
+						<router-link to="form">
 				         	<el-menu-item index="1-3">Form</el-menu-item>
 				        </router-link>
-						<router-link to="/form2">
+						<router-link to="form2">
 				        	<el-menu-item index="1-4">选择器</el-menu-item>
 						</router-link>
+
 				       </el-menu-item-group>
 			    	</el-submenu>
 
 			    	<el-submenu index="2">
 			    		<template slot="title"><i class="el-icon-document"></i>文档</template>
 						<el-menu-item-group>
-							<router-link to="/vuedoc"> 
+							<router-link to="vuedoc"> 
 			    				<el-menu-item index="2-1">Vue文档</el-menu-item>	
 							</router-link>
-							<router-link to="/elementdoc">
+							<router-link to="elementdoc">
 								<el-menu-item index="2-2">Element文档</el-menu-item>
 							</router-link>
 						</el-menu-item-group>
