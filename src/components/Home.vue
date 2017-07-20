@@ -19,44 +19,16 @@
 		<el-col :span="24" class="main">
 			<!-- 菜单 -->
 			<div class="main-menu">
-				<el-menu default-active="1-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-			    	<el-submenu index="1">
-				       <template slot="title"><i class="el-icon-menu"></i>主页</template>
-				       <el-menu-item-group title="分组1">
-				         <!-- <template slot="title">分组一</template> -->
-				         <router-link to="/"> 
-				         	<el-menu-item index="1-1">表格</el-menu-item>
-				         </router-link> 
-				         <router-link to="example">
-				         	<el-menu-item index="1-2">实例</el-menu-item>
-				         </router-link>
-				       </el-menu-item-group>
-				       <el-menu-item-group title="静态页面">
-						<router-link to="form">
-				         	<el-menu-item index="1-3">Form</el-menu-item>
-				        </router-link>
-						<router-link to="form2">
-				        	<el-menu-item index="1-4">选择器</el-menu-item>
-						</router-link>
-
-				       </el-menu-item-group>
-			    	</el-submenu>
-
-			    	<el-submenu index="2">
-			    		<template slot="title"><i class="el-icon-document"></i>文档</template>
-						<el-menu-item-group>
-							<router-link to="vuedoc"> 
-			    				<el-menu-item index="2-1">Vue文档</el-menu-item>	
-							</router-link>
-							<router-link to="elementdoc">
-								<el-menu-item index="2-2">Element文档</el-menu-item>
-							</router-link>
-						</el-menu-item-group>
-			    	</el-submenu>
-			    	
-
-			    	<el-menu-item index="3"><i class="el-icon-information"></i>信息</el-menu-item>
-
+				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
+				    	<el-submenu :index="''+index" ><!-- ''+ 转成字符串 -->
+					       <template slot="title"><i :class="item.icon"></i>{{ item.name }}</template>
+					         <router-link v-for="children in item.children" :to="children.path"> 
+					         	<el-menu-item :index="children.path">{{ children.name }}</el-menu-item>
+					         </router-link> 
+				    		
+				    	</el-submenu>
+					</template>
 				</el-menu>
 			</div>
 
@@ -65,12 +37,6 @@
 					<router-view></router-view>
 				</transition>
 			</section>
-				
-		
-				
-		
-
-			
 
 		</el-col>
 
